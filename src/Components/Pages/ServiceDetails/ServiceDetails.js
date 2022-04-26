@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import useServiceDetails from "../../useServiceDetails/useServiceDetails";
 
 const ServiceDetails = () => {
   const { serviceID } = useParams();
-  const [service, setService] = useState({});
+  const [service] = useServiceDetails(serviceID)
+ /*  const [service, setService] = useState({});
   useEffect(() => {
     const url = `http://localhost:5000/service/${serviceID}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setService(data));
-  }, [serviceID]);
+  }, [serviceID]); */
   return (
     <div className="flex flex-col justify-center items-center ">
       <h1 className="text-2xl">Welcome to service Details: {service.name} </h1>
-      <Link to="/checkout">
+      <Link to={`/checkout/${serviceID}`}>
         <button className="bg-green-500 hover:bg-green-600 px-3 py-2 rounded text-xl text-white mt-5">
           Proceed Checkout
         </button>
